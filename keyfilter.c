@@ -13,6 +13,10 @@ bool prefix_matches_string(char prefix[], char string[])
     return true;
 }
 
+char* sort_alphabetically(char string[]){
+    
+}
+
 int main(int argc, char *argv[])
 {
     char entered_address[100];
@@ -31,12 +35,12 @@ int main(int argc, char *argv[])
     }
     for (int i = 0; i < address_count; i++) { // check if entered address matches any addresses from the list
         if (strcmp(entered_address, address_list[i]) == 0) {
-            printf("Found: %s", entered_address);
+            printf("Found: %s\n", entered_address);
             address_found = true;
         }
     }
 
-    char possible_addresses[42][100];
+    char possible_addresses[50][100];
     int possible_address_count = 0;
     char enabled_letters[30];
     int enabled_letters_count = 0;
