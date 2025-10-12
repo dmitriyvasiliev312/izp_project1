@@ -13,15 +13,15 @@ bool prefix_matches_string(char prefix[], char string[])
     return true;
 }
 
-char* sort_alphabetically(char string[]){
-    
-}
+// char *sort_alphabetically(char string[]) {}
 
 int main(int argc, char *argv[])
 {
     char entered_address[100];
     if (argc > 1) { // read entered address
         strcpy(entered_address, argv[1]);
+    } else {
+        strcpy(entered_address, " ");
     }
     int address_count = 0;
     char address_list[42][100];
