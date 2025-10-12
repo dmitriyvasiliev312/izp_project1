@@ -1,3 +1,4 @@
+#include <ctype.h>
 #include <stdbool.h>
 #include <stdio.h>
 #include <string.h>
@@ -15,22 +16,23 @@ bool prefix_matches_string(char prefix[], char string[])
 int main(int argc, char *argv[])
 {
     char entered_address[100];
-    if (argc > 1) {
+    if (argc > 1) { // read entered address
         strcpy(entered_address, argv[1]);
     }
     int address_count = 0;
     char address_list[42][100];
+    bool address_found = false;
 
-    while (scanf("%99s", address_list[address_count]) != EOF) { // getting list of adresses
+    while (scanf("%99s", address_list[address_count]) != EOF) { // getting list of addresses
         address_count++;
         if (address_count == 42) {
             break;
         }
     }
-    for (int i = 0; i < address_count; i++) {
-        printf("%s\n", address_list[i]);
+    for (int i = 0; i < address_count; i++) { // check if entered address matches any addresses from the list
         if (strcmp(entered_address, address_list[i]) == 0) {
-            printf("Found : %s", entered_address);
+            printf("Found: %s", entered_address);
+            address_found = true;
         }
     }
 
@@ -45,13 +47,22 @@ int main(int argc, char *argv[])
             possible_address_count++;
 
             char next_letter = address_list[i][strlen(entered_address)];
-            if(strchr(enabled_letters, next_letter) == NULL){
+            if (strchr(enabled_letters, next_letter) == NULL) {
                 enabled_letters[enabled_letters_count] = next_letter;
                 enabled_letters_count++;
             }
         }
     }
 
-    printf("enables : %s", enabled_letters);
+    for (int i = 0; i < enabled_letters_count; i++) {
+        enabled_letters[i] = toupper(enabled_letters[i]);
+    }
+
+    if (!address_found && enabled_letters_count == 0) {
+        printf("Not found");
+    } else if (enabled_letters_count > 0) {
+        printf("Enable: %s", enabled_letters);
+    }
+
     return 0;
 }
