@@ -66,8 +66,10 @@ int main(int argc, char *argv[])
     }
     for (int i = 0; i < address_count; i++) { // check if entered address matches any addresses from the list
         if (strcmp(entered_address, address_list[i]) == 0) {
-            entered_address[0] = toupper(entered_address[0]);
-            printf("Found: %s\n", entered_address);
+            char temp[100];
+            strcpy(temp, entered_address);
+            temp[0] = toupper(temp[0]);
+            printf("Found: %s\n", temp);
             address_found = true;
         }
     }
@@ -89,6 +91,7 @@ int main(int argc, char *argv[])
             }
         }
     }
+    // enabled_letters[enabled_letters_count] = '\0';
     // for (int i = 0; i < enabled_letters_count; i++) {
     //     enabled_letters[i] = toupper(enabled_letters[i]);
     // }
@@ -97,9 +100,9 @@ int main(int argc, char *argv[])
 
     if (!address_found && enabled_letters_count == 0) {
         printf("Not found");
-    } else if (possible_address_count == 1) {
+    } else if (possible_address_count == 1 && !address_found) {
         possible_addresses[0][0] = toupper(possible_addresses[0][0]);
-        printf("Found : %s", possible_addresses[0]);
+        printf("Found: %s", possible_addresses[0]);
     } else if (enabled_letters_count > 0) {
         printf("Enable: %s", enabled_letters);
     }
