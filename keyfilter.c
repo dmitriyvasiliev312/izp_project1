@@ -57,14 +57,20 @@ int main(int argc, char *argv[])
     char address_list[43][200];
     bool address_found = false;
 
-    while (scanf("%200s", address_list[address_count]) != EOF) { // getting list of addresses
+    // while (scanf("%200s", address_list[address_count]) != EOF) { // getting list of addresses
+    //     lowercase(address_list[address_count]);
+    //     address_count++;
+    //     if (address_count == 43) {
+    //         break;
+    //     }
+    // }
+
+    while (address_count < 42 && scanf("%200[^\n]", address_list[address_count]) == 1) {
+        getchar(); // consume newline after reading the line
         lowercase(address_list[address_count]);
         address_count++;
-        if (address_count == 43) {
-            break;
-        }
     }
-    
+
     for (int i = 0; i < address_count; i++) { // check if entered address matches any addresses from the list
         if (strcmp(entered_address, address_list[i]) == 0) {
             uppercase(entered_address);
