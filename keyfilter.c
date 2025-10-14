@@ -91,10 +91,6 @@ int main(int argc, char *argv[])
             }
         }
     }
-    // enabled_letters[enabled_letters_count] = '\0';
-    // for (int i = 0; i < enabled_letters_count; i++) {
-    //     enabled_letters[i] = toupper(enabled_letters[i]);
-    // }
     uppercase(enabled_letters);
     sort_alphabetically(enabled_letters);
 
