@@ -5,12 +5,29 @@
 
 bool prefix_matches_string(char prefix[], char string[])
 {
-    for (int i = 0; i < strlen(prefix); i++) {
+    size_t n = strlen(prefix); // using size_t because otherwise it gives an error when compared to strlen
+    for (size_t i = 0; i < n; i++) {
         if (string[i] != prefix[i]) {
             return false;
         }
     }
     return true;
+}
+
+void uppercase(char *str)
+{
+    int n = strlen(str);
+    for (int i = 0; i < n; i++) {
+        str[i] = toupper(str[i]);
+    }
+}
+
+void lowercase(char *str)
+{
+    int n = strlen(str);
+    for (int i = 0; i < n; i++) {
+        str[i] = tolower(str[i]);
+    }
 }
 
 void sort_alphabetically(char *str)
@@ -32,6 +49,7 @@ int main(int argc, char *argv[])
     char entered_address[100];
     if (argc > 1) { // read entered address
         strcpy(entered_address, argv[1]);
+        lowercase(entered_address);
     } else {
         strcpy(entered_address, " ");
     }
@@ -40,6 +58,7 @@ int main(int argc, char *argv[])
     bool address_found = false;
 
     while (scanf("%99s", address_list[address_count]) != EOF) { // getting list of addresses
+        lowercase(address_list[address_count]);
         address_count++;
         if (address_count == 42) {
             break;
@@ -47,6 +66,7 @@ int main(int argc, char *argv[])
     }
     for (int i = 0; i < address_count; i++) { // check if entered address matches any addresses from the list
         if (strcmp(entered_address, address_list[i]) == 0) {
+            entered_address[0] = toupper(entered_address[0]);
             printf("Found: %s\n", entered_address);
             address_found = true;
         }
@@ -69,19 +89,18 @@ int main(int argc, char *argv[])
             }
         }
     }
-
-    for (int i = 0; i < enabled_letters_count; i++) {
-        enabled_letters[i] = toupper(enabled_letters[i]);
-    }
+    // for (int i = 0; i < enabled_letters_count; i++) {
+    //     enabled_letters[i] = toupper(enabled_letters[i]);
+    // }
+    uppercase(enabled_letters);
     sort_alphabetically(enabled_letters);
 
     if (!address_found && enabled_letters_count == 0) {
         printf("Not found");
-    }
-    else if (possible_address_count == 1) {
+    } else if (possible_address_count == 1) {
+        possible_addresses[0][0] = toupper(possible_addresses[0][0]);
         printf("Found : %s", possible_addresses[0]);
-    }
-    else if (enabled_letters_count > 0) {
+    } else if (enabled_letters_count > 0) {
         printf("Enable: %s", enabled_letters);
     }
     return 0;
