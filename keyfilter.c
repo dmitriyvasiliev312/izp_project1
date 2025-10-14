@@ -13,7 +13,19 @@ bool prefix_matches_string(char prefix[], char string[])
     return true;
 }
 
-// char *sort_alphabetically(char string[]) {}
+void sort_alphabetically(char *str)
+{
+    int n = strlen(str);
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = 0; j < n - i - 1; j++) {
+            if (str[j] > str[j + 1]) {
+                char temp = str[j];
+                str[j] = str[j + 1];
+                str[j + 1] = temp;
+            }
+        }
+    }
+}
 
 int main(int argc, char *argv[])
 {
@@ -61,12 +73,16 @@ int main(int argc, char *argv[])
     for (int i = 0; i < enabled_letters_count; i++) {
         enabled_letters[i] = toupper(enabled_letters[i]);
     }
+    sort_alphabetically(enabled_letters);
 
     if (!address_found && enabled_letters_count == 0) {
         printf("Not found");
-    } else if (enabled_letters_count > 0) {
+    }
+    else if (possible_address_count == 1) {
+        printf("Found : %s", possible_addresses[0]);
+    }
+    else if (enabled_letters_count > 0) {
         printf("Enable: %s", enabled_letters);
     }
-
     return 0;
 }
