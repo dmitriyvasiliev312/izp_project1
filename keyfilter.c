@@ -1,3 +1,4 @@
+
 #include <ctype.h>
 #include <stdbool.h>
 #include <stdio.h>
@@ -48,7 +49,12 @@ int main(int argc, char *argv[])
 {
     char entered_address[101];
     if (argc > 1) { // read entered address
-        strcpy(entered_address, argv[1]);
+        for(int i = 1; i < argc; i++){
+            strcat(entered_address, argv[i]);
+            if(i != argc -1){
+                strcat(entered_address, " ");
+            }
+        }
         lowercase(entered_address);
     } else {
         strcpy(entered_address, "");
@@ -56,14 +62,6 @@ int main(int argc, char *argv[])
     int address_count = 0;
     char address_list[43][200];
     bool address_found = false;
-
-    // while (scanf("%200s", address_list[address_count]) != EOF) { // getting list of addresses
-    //     lowercase(address_list[address_count]);
-    //     address_count++;
-    //     if (address_count == 43) {
-    //         break;
-    //     }
-    // }
 
     while (address_count < 42 && scanf("%200[^\n]", address_list[address_count]) == 1) {
         getchar(); // consume newline after reading the line
