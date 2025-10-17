@@ -1,4 +1,3 @@
-
 #include <ctype.h>
 #include <stdbool.h>
 #include <stdio.h>
@@ -34,7 +33,7 @@ void lowercase(char *str)
 void sort_alphabetically(char *str)
 {
     int n = strlen(str);
-    for (int i = 0; i < n - 1; i++) {
+    for (int i = 0; i < n - 1; i++) { // using bubble sort to sort a string alphabetically
         for (int j = 0; j < n - i - 1; j++) {
             if (str[j] > str[j + 1]) {
                 char temp = str[j];
@@ -64,7 +63,7 @@ int main(int argc, char *argv[])
     bool address_found = false;
 
     while (address_count < 42 && scanf("%200[^\n]", address_list[address_count]) != EOF) {
-        getchar();                                    // consume newline after reading the line
+        getchar();                                    // consume new line after reading the line
         if (address_list[address_count][0] == '\0') { // skip empty lines
             getchar();
             continue;
@@ -87,7 +86,9 @@ int main(int argc, char *argv[])
     int enabled_letters_count = 0;
 
     for (int i = 0; i < address_count; i++) {
-        if (prefix_matches_string(entered_address, address_list[i])) {
+        if (prefix_matches_string(
+                entered_address,
+                address_list[i])) { // check if entered address is a prefix of any of the addresses from the list
             strcpy(possible_addresses[possible_address_count], address_list[i]);
             possible_address_count++;
 
