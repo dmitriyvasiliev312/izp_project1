@@ -63,8 +63,12 @@ int main(int argc, char *argv[])
     char address_list[43][200];
     bool address_found = false;
 
-    while (address_count < 42 && scanf("%200[^\n]", address_list[address_count]) == 1) {
+    while (address_count < 42 && scanf("%200[^\n]", address_list[address_count]) != EOF) {
         getchar(); // consume newline after reading the line
+        if (address_list[address_count][0] == '\0') { // skip empty lines
+            getchar(); 
+            continue;
+        }
         lowercase(address_list[address_count]);
         address_count++;
     }
