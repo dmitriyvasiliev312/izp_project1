@@ -49,9 +49,9 @@ int main(int argc, char *argv[])
 {
     char entered_address[101];
     if (argc > 1) { // read entered address
-        for(int i = 1; i < argc; i++){
+        for (int i = 1; i < argc; i++) {
             strcat(entered_address, argv[i]);
-            if(i != argc -1){
+            if (i != argc - 1) {
                 strcat(entered_address, " ");
             }
         }
@@ -64,9 +64,9 @@ int main(int argc, char *argv[])
     bool address_found = false;
 
     while (address_count < 42 && scanf("%200[^\n]", address_list[address_count]) != EOF) {
-        getchar(); // consume newline after reading the line
+        getchar();                                    // consume newline after reading the line
         if (address_list[address_count][0] == '\0') { // skip empty lines
-            getchar(); 
+            getchar();
             continue;
         }
         lowercase(address_list[address_count]);
@@ -104,7 +104,6 @@ int main(int argc, char *argv[])
     if (!address_found && enabled_letters_count == 0) {
         printf("Not found");
     } else if (possible_address_count == 1 && !address_found) {
-        possible_addresses[0][0] = toupper(possible_addresses[0][0]);
         uppercase(possible_addresses[0]);
         printf("Found: %s", possible_addresses[0]);
     } else if (enabled_letters_count > 0) {
